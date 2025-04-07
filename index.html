@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ShoppingListCheckOff">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shopping List Check‑Off</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2em;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    .container {
+      display: flex;
+      gap: 2em;
+    }
+    .list {
+      flex: 1;
+      border: 1px solid #ccc;
+      padding: 1em;
+      border-radius: 4px;
+    }
+    .list ul {
+      list-style: none;
+      padding: 0;
+    }
+    .list li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5em;
+    }
+    button {
+      margin-left: 1em;
+    }
+    .message {
+      font-style: italic;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <h1>Shopping List Check‑Off</h1>
+  <div class="container">
+    <div class="list" ng-controller="ToBuyController as toBuy">
+      <h2>To Buy</h2>
+      <p class="message" ng-if="toBuy.items.length === 0">
+        Everything is bought!
+      </p>
+      <ul>
+        <li ng-repeat="item in toBuy.items track by $index">
+          Buy {{ item.quantity }} {{ item.name }}
+          <button ng-click="toBuy.buyItem($index)">Bought</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="list" ng-controller="AlreadyBoughtController as bought">
+      <h2>Already Bought</h2>
+      <p class="message" ng-if="bought.items.length === 0">
+        Nothing bought yet.
+      </p>
+      <ul>
+        <li ng-repeat="item in bought.items track by $index">
+          Bought {{ item.quantity }} {{ item.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
